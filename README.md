@@ -8,6 +8,7 @@ This is a functional backend architecture project designed to demonstrate the in
 * **Relational Database Logging:** All transactions are recorded in MySQL, including timestamps and specific operational logic.
 * **Exception Handling:** Built-in safeguards against mathematical exceptions (e.g., division by zero).
 * **Data Export:** Functionality to query user-specific logs and export them to CSV formats for external analysis.
+* **Automated Reporting Module:** Includes a standalone Python script (analytics_dashboard.py) that parses exported CSV logs to generate instant, terminal-based metric summaries (tracking active users, total transactions, and latest system activity).
 
 ## Tech Stack
 * **Language:** Python
