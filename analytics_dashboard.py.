@@ -1,0 +1,26 @@
+import csv
+
+def run_analytics(filename):
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            data = list(csv.DictReader(file))
+            
+        if not data:
+            return print("Report: No data available.")
+            
+        total_transactions = len(data)
+        unique_users = set(row['username'] for row in data)
+        latest_activity = max(row['timestamp'] for row in data)
+        
+        print("📊 --- DELIVERY ENGINEERING METRICS ---")
+        print(f"Total Transactions Processed: {total_transactions}")
+        print(f"Unique Active Users: {len(unique_users)}")
+        print(f"Last System Interaction: {latest_activity}")
+        print("--------------------------------------")
+        
+    except FileNotFoundError:
+        print("⚠️ System Error: CSV log file not found. Run export first.")
+
+if __name__ == "__main__":
+    # Ensure this matches the name of a CSV you exported
+    run_analytics("exported_logs.csv") 
