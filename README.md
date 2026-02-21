@@ -17,3 +17,10 @@ This is a functional backend architecture project designed to demonstrate the in
 
 ## Engineering Focus
 The primary goal of this project was mastering the **Fundamentals** of data persistence, secure database connections, and backend logic flow.
+
+## 🗺️ Future Roadmap (V2.0)
+To scale this application for production, the following features are planned for the next sprint:
+* **Role-Based Access Control (RBAC):** Implementing `Admin` vs `Standard User` permissions, restricting standard users to querying only their own session logs.
+* **Dynamic Registration:** Adding a front-end script for secure user sign-up and password hashing.
+* **Full CRUD Functionality:** Allowing Admins to permanently delete or archive legacy logs to optimize database query speeds.
+
