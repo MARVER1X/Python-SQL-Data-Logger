@@ -51,6 +51,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- =========================================================================
+-- SECURITY NOTE FOR REVIEWERS: 
+-- Passwords below are stored in plain text strictly for local testing 
+-- and portfolio demonstration purposes so reviewers can easily log in. 
+-- In a production CI/CD pipeline, these would be securely hashed 
+-- (e.g., bcrypt / SHA-256) prior to database insertion.
+-- =========================================================================
+
 -- Dumping data for table calculator_db.users: ~0 rows (approximately)
 INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
 	(1, 'admin', 'pass123'),
@@ -61,3 +69,4 @@ INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
