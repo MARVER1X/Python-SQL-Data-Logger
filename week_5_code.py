@@ -1,9 +1,7 @@
 import math
 import os
 import csv
-import sys
 import mysql.connector
-import ast
 
 from datetime import datetime
 from datetime import date
@@ -20,6 +18,10 @@ connection = mysql.connector.connect(
 cursor = connection.cursor(buffered=True)
 
 # ---------------- FUNCTIONS ----------------
+
+def clear_screen():
+    # 'nt' means Windows. If it's not Windows, it assumes Mac/Linux and uses 'clear'
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def checkUserExists(username, password):
     query = "SELECT user_id FROM users WHERE username = %s AND password = %s"
@@ -168,7 +170,11 @@ while True:
 
     elif operation == "12":
         expr = input("Insert equation: ")
-        # Using eval() allows the program to process math operators like + and *
+        # =========================================================
+        # SECURITY NOTE: eval() is used here strictly for local demo 
+        # purposes. In production, this must be replaced with a secure 
+        # parser to prevent Arbitrary Code Execution (ACE).
+        # =========================================================
         answer = eval(expr)
 
     elif operation == "13":
@@ -180,8 +186,9 @@ while True:
         else:
             print("No logs found")
 
-            # ----------- Pause after output and logging -----------
-            input("\nPress Enter to continue...")
+        # ----------- Pause after output and logging -----------
+        input("\nPress Enter to continue...")
+        clear_screen()
         continue  # Restarts the menu instead of crashing
 
     print("Answer:", answer)
@@ -204,6 +211,7 @@ while True:
 
 # ----------- Pause after output and logging -----------
     input("\nPress Enter to continue...")
+    clear_screen()
 
 # ---------------- EXPORT ----------------
 # This section now safely runs only after you press '0' to exit the loop
@@ -215,3 +223,7 @@ if export_choice == "yes":
     export_logs_to_csv(logs, filename)
 
 print("Program finished successfully.")
+
+# Clean up database connections
+cursor.close()
+connection.close()
