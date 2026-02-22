@@ -22,5 +22,6 @@ def run_analytics(filename):
         print("⚠️ System Error: CSV log file not found. Run export first.")
 
 if __name__ == "__main__":
-    # Ensure this matches the name of a CSV you exported
-    run_analytics("exported_logs.csv") 
+    # Ask the user exactly which file to analyze
+    target_file = input("Enter the CSV filename to analyze (e.g., logs_22_02_2026.csv): ")
+    run_analytics(target_file)
