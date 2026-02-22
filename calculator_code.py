@@ -81,6 +81,7 @@ while True:
 
 # ---------------- MAIN CALCULATOR LOOP ----------------
 while True:
+    clear_screen()
     # ---------------- MENU ----------------
     print("\nSelect an operation")
     print("1. + for addition")
@@ -222,7 +223,7 @@ while True:
 
     export_choice = input("\nExport logs to CSV? (yes/no): ").lower()
     if export_choice == "yes":
-        filename = "logs_" + date.today().strftime('%d_%m_%Y') + ".csv"
+        filename = f"logs_{username}_{date.today().strftime('%d_%m_%Y')}.csv"
         export_logs_to_csv(logs, filename)
         input("\nPress Enter to continue...")
         clear_screen()
