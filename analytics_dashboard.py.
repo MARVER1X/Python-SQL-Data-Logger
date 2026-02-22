@@ -57,7 +57,7 @@ if __name__ == "__main__":
         if operation == "1":
             clear_screen()
             # Prompt user for the exact CSV file to analyze
-            target_file = input("\nEnter the CSV filename to analyze (e.g., logs_22_02_2026.csv): ")
+            target_file = input("\nEnter the CSV filename to analyze (e.g., logs_admin_22_02_2026.csv): ")
             run_analytics(target_file)
             
         elif operation == "0":
