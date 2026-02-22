@@ -1,27 +1,71 @@
 import csv
+import os
+
+# ---------------- FUNCTIONS ----------------
+
+def clear_screen():
+    """Clears the terminal screen dynamically based on the operating system."""
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def run_analytics(filename):
+    """Reads a generated CSV log file and outputs Delivery Engineering metrics."""
     try:
+        # Safely open and read the CSV file
         with open(filename, 'r', encoding='utf-8') as file:
             data = list(csv.DictReader(file))
             
+        # Edge Case: The file exists but has no data inside it
         if not data:
-            return print("Report: No data available.")
+            print("\nReport: No data available.")
+            input("\nPress Enter to continue...") 
+            clear_screen()
+            return
             
+        # Core Metrics Calculations
         total_transactions = len(data)
         unique_users = set(row['username'] for row in data)
         latest_activity = max(row['timestamp'] for row in data)
         
-        print("📊 --- DELIVERY ENGINEERING METRICS ---")
+        # Display the Analytics Dashboard
+        print("\n📊 --- DELIVERY ENGINEERING METRICS ---")
         print(f"Total Transactions Processed: {total_transactions}")
         print(f"Unique Active Users: {len(unique_users)}")
         print(f"Last System Interaction: {latest_activity}")
         print("--------------------------------------")
         
-    except FileNotFoundError:
-        print("⚠️ System Error: CSV log file not found. Run export first.")
+        input("\nPress Enter to continue...")
+        clear_screen()
 
+    except FileNotFoundError:
+        # Gracefully handle the error if the user types the wrong filename
+        print("\n⚠️ System Error: CSV log file not found. Run export first.")
+        input("\nPress Enter to continue...")
+        clear_screen()
+
+# ---------------- MAIN APPLICATION LOOP ----------------
+
+# This ensures the script only runs if executed directly from the terminal
 if __name__ == "__main__":
-    # Ask the user exactly which file to analyze
-    target_file = input("Enter the CSV filename to analyze (e.g., logs_22_02_2026.csv): ")
-    run_analytics(target_file)
+    while True:
+        clear_screen()
+        print("\n********** Analytics Engine **********")
+        print("1. Run analytics")
+        print("0. Exit")
+
+        operation = input("Select an option: ")
+
+        if operation == "1":
+            clear_screen()
+            # Prompt user for the exact CSV file to analyze
+            target_file = input("\nEnter the CSV filename to analyze (e.g., logs_22_02_2026.csv): ")
+            run_analytics(target_file)
+            
+        elif operation == "0":
+            clear_screen()
+            print("Program finished successfully.")
+            break # Breaks the loop and cleanly ends the program
+            
+        else:
+            clear_screen()
+            print("Invalid Input!!!")
+            # The loop will automatically restart to ask the user again
