@@ -66,6 +66,7 @@ def export_logs_to_csv(logs, filename="exported_logs.csv"):
 
 # ---------------- LOGIN ----------------
 while True:
+    clear_screen()
     print("\n********** Login System **********")
     username = input("Enter username: ")
     password = input("Enter password: ")
@@ -102,6 +103,7 @@ while True:
     # REAL EXIT
     if operation == "0":
         print("Calculator Closed")
+        clear_screen()
         break  # Drops out of the loop to run the export logic
 
     # INPUT VALIDATION
@@ -214,16 +216,25 @@ while True:
     clear_screen()
 
 # ---------------- EXPORT ----------------
-# This section now safely runs only after you press '0' to exit the loop
-logs = search_logs_by_username(username)
+while True:
+    # This section now safely runs only after you press '0' to exit the loop
+    logs = search_logs_by_username(username)
 
-export_choice = input("\nExport logs to CSV? (yes/no): ").lower()
-if export_choice == "yes":
-    filename = "logs_" + date.today().strftime('%d_%m_%Y') + ".csv"
-    export_logs_to_csv(logs, filename)
-
-print("Program finished successfully.")
-
+    export_choice = input("\nExport logs to CSV? (yes/no): ").lower()
+    if export_choice == "yes":
+        filename = "logs_" + date.today().strftime('%d_%m_%Y') + ".csv"
+        export_logs_to_csv(logs, filename)
+        input("\nPress Enter to continue...")
+        clear_screen()
+        print("Program finished successfully.")
+        break
+    elif export_choice == "no":
+        clear_screen()
+        print("Program finished successfully.")
+        break
+    else:
+        print("\n Invalid input!")
+        continue
 # Clean up database connections
 cursor.close()
 connection.close()
